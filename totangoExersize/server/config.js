@@ -8,7 +8,7 @@ const config = {
     password: env.DB_PASSWORD || 'totangoPassword',
     database: env.DB_NAME || 'postgres',
   },
-  listPerPage: env.LIST_PER_PAGE || 10,
+  listPerPage: env.LIST_PER_PAGE || 10
 };
 
 module.exports = config;
