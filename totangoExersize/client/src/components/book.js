@@ -1,33 +1,34 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Fragment} from "react";
 import "../App.css";
 import 'reactjs-popup/dist/index.css';
 import Popup from "reactjs-popup";
-import {useRest} from "../hooks/useRest"
+import {useRest} from "../hooks/useRest";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import EditBook from "./EditBook";
+import BookDetails from "./BookDetails";
+
 
 const Book = (book) => {
     const {removeBook, editBook} = useRest();
     const [isOpen, setIsOpen] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
 
     }, []);
 
+    const textChange = () => console.log('change');
+
 
     return (
         <div>
             <div>Title: {book.title} ISBN: {book.ISBN} Author: {book.author}
-                <button onClick={() => removeBook(book.ISBN)}>Remove</button>
-                <button onClick={() => editBook(book)}>Edit</button>
-                <button onClick={() => setIsOpen(true)}>show</button>
-                {isOpen &&
-                    <Popup open={isOpen} onClose={() => setIsOpen(false)} position="right center" closeOnEscape={true}>
-                        <div>title: {book.title}</div>
-                        <div>ISBN: {book.ISBN}</div>
-                        <div>publicationDate: {book.publicationDate}</div>
-                        <div>author: {book.author}</div>
-                        <div>genre: {book.genre}</div>
-                        <div>price: {book.price}</div>
-                    </Popup>}
+                <Button variant="contained" onClick={() => removeBook(book.ISBN)}>Remove</Button>
+                <Button variant="contained" onClick={() => setIsEdit(true)}>Edit</Button>
+                {isEdit && <EditBook {...book} editMode={true}/>}
+                <Button onClick={() => setIsOpen(true)}>Show</Button>
+                {isOpen && <BookDetails {...book} open={true}/>}
             </div>
         </div>
     );

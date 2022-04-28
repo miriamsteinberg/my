@@ -15,7 +15,7 @@ export const useRest = () => {
     });
 
 
-    const editBook = (book) => fetch('http://localhost:3002/books/' + book.isbn, {
+    const editBook = (book) => fetch('http://localhost:3002/books/' + book.ISBN, {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(book)
